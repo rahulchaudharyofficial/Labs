@@ -8,6 +8,36 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Crm_Service_Usage__c.Comment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Crm_Service_Usage__c.Is_Archieved__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Crm_Service_Usage__c.Request__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Crm_Service_Usage__c.Requester__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Crm_Service_Usage__c.Response__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Crm_Service_Usage__c.Status__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Crm_Service__c.Description__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -41,6 +71,14 @@
         <field>Crm_Service__c.Stage__c</field>
         <readable>true</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Crm_Service__c.Usage__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <layoutAssignments>
+        <layout>Crm_Service_Usage__c-Crm Service Usage Layout</layout>
+    </layoutAssignments>
     <layoutAssignments>
         <layout>Crm_Service__c-Crm Service Layout</layout>
     </layoutAssignments>
@@ -50,9 +88,22 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>Crm_Service_Usage__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>Crm_Service__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <tabVisibilities>
+        <tab>Crm_Service_Usage__c</tab>
+        <visibility>DefaultOff</visibility>
+    </tabVisibilities>
     <tabVisibilities>
         <tab>Crm_Service__c</tab>
         <visibility>DefaultOff</visibility>
