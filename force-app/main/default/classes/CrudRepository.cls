@@ -1,4 +1,10 @@
 public without sharing class CrudRepository implements ICrudRepository {
+    Schema.SObjectType entityType = null;
+    public CrudRepository(Schema.SObjectType entityType)
+    {
+        this.entityType = entityType;
+    }
+
     public List<SObject> persist(List<SObject> toSave, Boolean allOrNone) {
         if(toSave == null || toSave.isEmpty())
         {
@@ -111,7 +117,7 @@ public without sharing class CrudRepository implements ICrudRepository {
             throw new GatekeeperUtil.GatekeeperException(GatekeeperUtil.MESSAGE_ERROR_INVALID_INPUT);
         }
         try {
-            Schema.DescribeSObjectResult result = ids.get(0).getSobjectType().getDescribe();
+            Schema.DescribeSObjectResult result = this.entityType.getDescribe();
             Set<String> fieldSet= result.fields.getMap().keySet();
             List<String> fieldList = new List<String>();
             fieldList.addAll(fieldSet);
@@ -128,7 +134,7 @@ public without sharing class CrudRepository implements ICrudRepository {
         {
             throw new GatekeeperUtil.GatekeeperException(GatekeeperUtil.MESSAGE_ERROR_INVALID_INPUT);
         }
-        Schema.DescribeSObjectResult result = recordId.getSobjectType().getDescribe();
+        Schema.DescribeSObjectResult result = this.entityType.getDescribe();
         Set<String> fieldSet= result.fields.getMap().keySet();
         List<String> fieldList = new List<String>();
         fieldList.addAll(fieldSet);

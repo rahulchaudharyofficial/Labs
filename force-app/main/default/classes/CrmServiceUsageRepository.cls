@@ -1,4 +1,9 @@
 public without sharing class CrmServiceUsageRepository implements ICrmServiceUsageRepository {
+    private ICrudRepository repository = null;
+
+    public CrmServiceUsageRepository() {
+        this.repository = new CrudRepository(Crm_Service_Usage__c.SObjectType);
+    }
     public List<Crm_Service_Usage__c> createCrmServiceUsage(List<Crm_Service_Usage__c> toCreate) {
         if(toCreate != null && !toCreate.isEmpty())
         {
