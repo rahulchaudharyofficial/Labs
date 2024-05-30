@@ -1,25 +1,20 @@
 public without sharing class CrmServiceUsageRepository implements ICrmServiceUsageRepository {
-    private ICrudRepository repository = null;
+    private ICrudRepository repository;
 
     public CrmServiceUsageRepository() {
         this.repository = new CrudRepository(Crm_Service_Usage__c.SObjectType);
     }
-    public List<Crm_Service_Usage__c> createCrmServiceUsage(List<Crm_Service_Usage__c> toCreate) {
-        if(toCreate != null && !toCreate.isEmpty())
-        {
-            insert toCreate;
-        }
-        return toCreate;
+
+    public List<Crm_Service_Usage__c> createCrmServiceUsage(List<Crm_Service_Usage__c> toCreate, Boolean allOrNone) {
+        return repository.persist(toCreate, allOrNone);
     }
 
-    public void updateCrmServiceUsage(List<Crm_Service_Usage__c> toUpdate) {
-        if(toUpdate != null && !toUpdate.isEmpty())
-        {
-            update toUpdate;
-        }
+    public List<Crm_Service_Usage__c> updateCrmServiceUsage(List<Crm_Service_Usage__c> toUpdate, Boolean allOrNone) {
+       return repository.modify(toUpdate, allOrNone);
     }
+    
 
     public Crm_Service_Usage__c getCrmServiceUsageById(Id usageId) {
-        return [SELECT Id, Name, Comment__c, Crm_Service__c, Is_Archieved__c,Request__c, Requester__c, Response__c, Status__c FROM Crm_Service_Usage__c WHERE Id = :usageId];
+        return (Crm_Service_Usage__c) repository.get(usageId);
     }
 }
