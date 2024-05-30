@@ -1,5 +1,4 @@
 public without sharing class CrudRepository implements ICrudRepository {
-    
     public List<SObject> persist(List<SObject> toSave, Boolean allOrNone) {
         if(toSave == null || toSave.isEmpty())
         {
@@ -74,7 +73,7 @@ public without sharing class CrudRepository implements ICrudRepository {
         allOrNone = (allOrNone != null? allOrNone: false);
         try
         {
-            List<Database.DeleteResult> results = Database.delete(toModify, allOrNone);
+            List<Database.DeleteResult> results = Database.delete(toRemove, allOrNone);
             for(Database.DeleteResult r: results)
             {
 
@@ -113,7 +112,11 @@ public without sharing class CrudRepository implements ICrudRepository {
         }
         try {
             Schema.DescribeSObjectResult result = ids.get(0).getSobjectType().getDescribe();
-            String query = 'SELECT '+ String.join(result.fields.getMap().keySet(), ',') +' FROM '+result.getName()+' WHERE Id in :ids';
+            Set<String> fieldSet= result.fields.getMap().keySet();
+            List<String> fieldList = new List<String>();
+            fieldList.addAll(fieldSet);
+            String fields = String.join(fieldList , ',');
+            String query = 'SELECT '+ fields +' FROM '+result.getName()+' WHERE Id in :ids';
             return Database.query(query);
         } catch (Exception e) {
             throw new GatekeeperUtil.GatekeeperException(e.getMessage());
@@ -126,7 +129,11 @@ public without sharing class CrudRepository implements ICrudRepository {
             throw new GatekeeperUtil.GatekeeperException(GatekeeperUtil.MESSAGE_ERROR_INVALID_INPUT);
         }
         Schema.DescribeSObjectResult result = recordId.getSobjectType().getDescribe();
-        String query = 'SELECT '+ String.join(result.fields.getMap().keySet(), ',') +' FROM '+result.getName()+' WHERE Id = :recordId';
+        Set<String> fieldSet= result.fields.getMap().keySet();
+        List<String> fieldList = new List<String>();
+        fieldList.addAll(fieldSet);
+        String fields = String.join(fieldList , ',');
+        String query = 'SELECT '+ fields +' FROM '+result.getName()+' WHERE Id = :recordId';
         return Database.query(query);
     }
 }
