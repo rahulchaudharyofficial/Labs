@@ -61,4 +61,20 @@ public without sharing class GatekeeperUtil {
             this.request = null;
         }
     }
+
+    public static GatekeeperRequest getGateKeeperRequestByRestRequest(RestRequest req) {
+        GatekeeperUtil.GatekeeperRequest gkReq = null;
+        try {
+            if(req != null && req.requestBody != null) {
+                gkReq = (GatekeeperUtil.GatekeeperRequest) JSON.deserialize(req.requestBody.toString(), GatekeeperUtil.GatekeeperRequest.class);
+            }
+            else {
+                throw new GatekeeperUtil.GatekeeperException('Rest request or request body is null');
+            }
+        }
+        catch (Exception e) {
+            throw new GatekeeperUtil.GatekeeperException(e.getMessage());
+        }
+        return gkReq;
+    }
 }
