@@ -5,4 +5,5 @@ public interface ICrudRepository {
     List<SObject> getByQuery(String query);
     List<SObject> getByIds(List<Id> ids);
     SObject get(Id id);
+    SObject createByProperty(Map<String,Object> props);
 }

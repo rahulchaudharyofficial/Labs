@@ -17,4 +17,8 @@ public without sharing class CrmServiceUsageRepository implements ICrmServiceUsa
     public Crm_Service_Usage__c getCrmServiceUsageById(Id usageId) {
         return (Crm_Service_Usage__c) repository.get(usageId);
     }
+
+    public Crm_Service_Usage__c createCrmServiceUsage(Map<String, Object> props) {
+        return (Crm_Service_Usage__c) repository.createByProperty(props);
+    }
 }

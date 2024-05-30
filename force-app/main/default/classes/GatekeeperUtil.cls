@@ -52,7 +52,7 @@ public without sharing class GatekeeperUtil {
         // status code
         public Integer statusCode {get;set;}
 
-        public RequestDTO request {get; set;}
+        public RestRequest request {get; set;}
 
         public GatekeeperResponse() {
             this.status = STATUS_SUCCESS;

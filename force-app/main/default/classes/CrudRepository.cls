@@ -5,6 +5,49 @@ public without sharing class CrudRepository implements ICrudRepository {
         this.entityType = entityType;
     }
 
+    private List<String> logError(Database.Error[] errors)
+    {
+        List<String> errs = new List<String>();
+        for(Database.Error err: errors)
+        {
+            System.debug('The following error has occurred.');                    
+            System.debug(err.getStatusCode() + ': ' + err.getMessage());
+            System.debug('fields that affected this error :'+ err.getFields());
+            errs.add(JSON.serialize(err));
+        }
+        return errs;
+    }
+        
+
+    public SObject createByProperty(Map<String,Object> props)
+    {
+        SObject record = null;
+        if(props != null || props.isEmpty()) {
+            throw new GatekeeperUtil.GatekeeperException(GatekeeperUtil.MESSAGE_ERROR_INVALID_INPUT);
+        }
+
+        try
+        {
+            record = this.entityType.newSObject();
+            for(String prop: props.keySet()) {
+                record.put(prop, props.get(prop));
+            }
+
+            Database.SaveResult result = Database.insert(record);
+            if(result.isSuccess()) {
+                System.debug('Successfully inserted record. ID: ' + result.getId());
+                return record;
+            }
+            else {
+                throw new GatekeeperUtil.GatekeeperException(JSON.serialize(logError(result.getErrors())));
+            }
+        }
+        catch(Exception e)
+        {
+            throw new GatekeeperUtil.GatekeeperException(e.getMessage());
+        }
+    }
+
     public List<SObject> persist(List<SObject> toSave, Boolean allOrNone) {
         if(toSave == null || toSave.isEmpty())
         {
@@ -23,12 +66,7 @@ public without sharing class CrudRepository implements ICrudRepository {
                 }
                 else
                 {
-                    for(Database.Error err : r.getErrors()) {
-
-                        System.debug('The following error has occurred.');                    
-                        System.debug(err.getStatusCode() + ': ' + err.getMessage());
-                        System.debug('fields that affected this error: ' + err.getFields());
-                    }
+                    throw new GatekeeperUtil.GatekeeperException(JSON.serialize(logError(r.getErrors())));
                 }
             }
         }
@@ -56,12 +94,7 @@ public without sharing class CrudRepository implements ICrudRepository {
                 }
                 else
                 {
-                    for(Database.Error err : r.getErrors()) {
-
-                        System.debug('The following error has occurred.');                    
-                        System.debug(err.getStatusCode() + ': ' + err.getMessage());
-                        System.debug('fields that affected this error: ' + err.getFields());
-                    }
+                    throw new GatekeeperUtil.GatekeeperException(JSON.serialize(logError(r.getErrors())));
                 }
             }
         }
@@ -89,12 +122,7 @@ public without sharing class CrudRepository implements ICrudRepository {
                 }
                 else
                 {
-                    for(Database.Error err : r.getErrors()) {
-
-                        System.debug('The following error has occurred.');                    
-                        System.debug(err.getStatusCode() + ': ' + err.getMessage());
-                        System.debug('fields that affected this error: ' + err.getFields());
-                    }
+                    throw new GatekeeperUtil.GatekeeperException(JSON.serialize(logError(r.getErrors())));
                 }
             }
         }
