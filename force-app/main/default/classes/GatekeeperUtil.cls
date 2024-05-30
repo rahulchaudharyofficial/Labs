@@ -12,6 +12,20 @@ public without sharing class GatekeeperUtil {
     
     public class GatekeeperException extends Exception {}
 
+    /**
+     * RestRequest wrapper
+    public class RequestDTO {
+        public GatekeeperUtil.GatekeeperRequest request {get;set;}
+        public Map<String, String> headers {get;set;}
+        public Map<String, String> params {get;set;}
+        public String httpMethod {get;set;}
+        public String remoteAddress {get;set;}
+        public String requestBody {get;set;}
+        public String requestURI {get; set;}
+        public String resourcePath {get;set;}
+    }
+    */
+
     public class GatekeeperRequest
     {
         // What service do you need
@@ -24,7 +38,7 @@ public without sharing class GatekeeperUtil {
         public String payload;
 
         // Is Async Requst
-        Public Boolean isAsync;
+        public Boolean isAsync;
     }
 
     public class GatekeeperResponse
@@ -38,10 +52,13 @@ public without sharing class GatekeeperUtil {
         // status code
         public Integer statusCode {get;set;}
 
+        public RequestDTO request {get; set;}
+
         public GatekeeperResponse() {
             this.status = STATUS_SUCCESS;
             this.response = '';
             this.statusCode = STATUS_CODE_SUCCESS;
+            this.request = null;
         }
     }
 }
