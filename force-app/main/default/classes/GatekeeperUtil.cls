@@ -39,7 +39,6 @@ public without sharing class GatekeeperUtil {
         public Integer statusCode {get;set;}
 
         public GatekeeperResponse() {
-
             this.status = STATUS_SUCCESS;
             this.response = '';
             this.statusCode = STATUS_CODE_SUCCESS;
