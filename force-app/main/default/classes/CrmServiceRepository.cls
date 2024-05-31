@@ -27,6 +27,6 @@ public without sharing class CrmServiceRepository implements ICrmServiceReposito
     }
 
     public List<Crm_Service__c> createCrmService(List<Crm_Service__c> servs, Boolean allOrNone) {
-        return (Crm_Service__c) repository.persist(servs, allOrNone);
+        return (List<Crm_Service__c>) repository.persist(servs, allOrNone);
     }
 }
