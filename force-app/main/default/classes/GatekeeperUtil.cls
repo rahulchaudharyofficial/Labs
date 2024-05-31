@@ -15,8 +15,6 @@ public without sharing class GatekeeperUtil {
     
     public class GatekeeperException extends Exception {}
 
-    /**
-     * RestRequest wrapper
     public class RequestDTO {
         public GatekeeperUtil.GatekeeperRequest request {get;set;}
         public Map<String, String> headers {get;set;}
@@ -26,22 +24,36 @@ public without sharing class GatekeeperUtil {
         public String requestBody {get;set;}
         public String requestURI {get; set;}
         public String resourcePath {get;set;}
+        public Boolean isRequestValid {get;set;}
+
+        public RequestDTO() {
+            this.headers = new Map<String, String>();
+            this.params = new Map<String, String>();
+            this.request = new GatekeeperUtil.GatekeeperRequest();
+            this.isRequestValid = false;
+        }
     }
-    */
 
     public class GatekeeperRequest
     {
         // What service do you need
-        public String serviceName;
+        public String serviceName {get;set;}
 
         // Optional - callerId - if you have unique identification token as caller entity (i.e. SAP, AWS)
-        public String callerId;
+        public String callerId {get;set;}
 
         // Request payload
-        public String payload;
+        public String payload {get;set;}
 
         // Is Async Requst
-        public Boolean isAsync;
+        public Boolean isAsync {get;set;}
+
+        public GatekeeperRequest() {
+            this.serviceName = '';
+            this.callerId = '';
+            this.payload = '';
+            this.isAsync = false;
+        }
     }
 
     public class GatekeeperResponse

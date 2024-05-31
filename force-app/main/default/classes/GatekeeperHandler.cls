@@ -5,14 +5,17 @@ public without sharing class GatekeeperHandler implements IGatekeeperHandler {
 
     public GatekeeperUtil.GatekeeperResponse handle(RestRequest req) {
         GatekeeperUtil.GatekeeperResponse response = null;
+        Crm_Service_Usage__c usageRecord = null;
+
         try 
         {
-            Crm_Service_Usage__c usageRecord = usageService.createUsageRecordByRestRequest(req);
+            usageRecord = usageService.createUsageRecordByRestRequest(req);
             response = validator.validateGatekeeperRequest(req);
         }
         catch (Exception e) {
             throw new GatekeeperUtil.GatekeeperException(e.getMessage());    
         }
+        
         return response;
     }
 }
