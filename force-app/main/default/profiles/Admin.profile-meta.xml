@@ -6,6 +6,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>CrmService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>CrmServiceRepository</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -35,6 +39,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>GatekeeperValidator</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ICrmService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -105,6 +113,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Crm_Service__c.Is_Active__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Crm_Service__c.Payload_Validator__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
