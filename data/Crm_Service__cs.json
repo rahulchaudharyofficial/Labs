@@ -1,0 +1,20 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Crm_Service__c",
+                "referenceId": "Crm_Service__cRef1"
+            },
+            "Name": "Invalid Service",
+            "Developer_Name__c": "Invalid_Service",
+            "Description__c": "This is a placeholder service which represent an invalid service or service that does not exist.",
+            "Is_Active__c": true,
+            "Request__c": null,
+            "Request_Model__c": null,
+            "Response__c": null,
+            "Service_Handler__c": null,
+            "Stage__c": "In Prod",
+            "Usage__c": 0
+        }
+    ]
+}

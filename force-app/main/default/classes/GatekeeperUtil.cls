@@ -65,6 +65,18 @@ public without sharing class GatekeeperUtil {
         }
     }
 
+    public static GatekeeperUtil.GatekeeperRequest getGatekeeperRequestByRestRequestOrGetNull(RestRequest req) {
+        GatekeeperUtil.GatekeeperRequest gkReq = null;
+        try {
+            gkReq = GatekeeperUtil.getGateKeeperRequestByRestRequest(req);    
+        } catch (Exception e) {
+            System.debug('GatekeeperHandler.getGatekeeperReq => '+ e.getMessage());
+            //throw new GatekeeperUtil.GatekeeperException(e.getMessage());
+            gkReq = null;
+        }
+        return gkReq;
+    }
+
     public static GatekeeperRequest getGateKeeperRequestByRestRequest(RestRequest req) {
         GatekeeperUtil.GatekeeperRequest gkReq = null;
         try {

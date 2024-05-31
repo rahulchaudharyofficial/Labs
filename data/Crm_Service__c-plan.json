@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Crm_Service__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "Crm_Service__cs.json"
+        ]
+    }
+]

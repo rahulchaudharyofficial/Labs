@@ -6,4 +6,6 @@ public interface ICrmServiceUsageService {
     Crm_Service_Usage__c getCrmServiceUsageById(Id usageId);
     
     Crm_Service_Usage__c createCrmServiceUsage(Map<String, Object> props);
+
+    Crm_Service_Usage__c createUsageRecordByRestRequest(RestRequest req);
 }
