@@ -22,7 +22,19 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>GatekeeperController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>GatekeeperHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>GatekeeperUtil</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>GatekeeperValidator</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -39,6 +51,14 @@
     </classAccesses>
     <classAccesses>
         <apexClass>ICrudRepository</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>IGatekeeperHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>IGatekeeperValidator</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
@@ -75,6 +95,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Crm_Service__c.Description__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Crm_Service__c.Developer_Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

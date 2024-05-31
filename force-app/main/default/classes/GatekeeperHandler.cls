@@ -2,16 +2,28 @@ public without sharing class GatekeeperHandler implements IGatekeeperHandler {
     private IGatekeeperValidator validator = new GatekeeperValidator();
     private ICrmServiceUsageService usageService = new CrmServiceUsageService();
 
-    private SObject createUsageRecord(RestRequest req) {
-        SObject result = null;
+    private GatekeeperUtil.GatekeeperRequest getGatekeeperReq(RestRequest req) {
+        GatekeeperUtil.GatekeeperRequest gkReq = null;
         try {
-            GatekeeperUtil.GatekeeperRequest gkReq = GatekeeperUtil.getGateKeeperRequestByRestRequest(req);
+            gkReq = GatekeeperUtil.getGateKeeperRequestByRestRequest(req);    
+        } catch (Exception e) {
+            System.debug('GatekeeperHandler.getGatekeeperReq => '+ e.getMessage());
+            //throw new GatekeeperUtil.GatekeeperException(e.getMessage());
+            gkReq = null;
+        }
+        return gkReq;
+    }
+
+    private Crm_Service_Usage__c createUsageRecord(RestRequest req, GatekeeperUtil.GatekeeperRequest gkReq) {
+        Crm_Service_Usage__c result = null;
+        try {
+            
             Map<String,Object> props = new Map<String,Object> {
                 'Status__c' => 'New',
                 'Response__c' => '',
                 'Requester__c' => UserInfo.getUserId(),
                 'Request__c' => JSON.serialize(req),
-                'Crm_Service__c' => gkReq.serviceName,
+                'Crm_Service__c' => ((gkReq != null && !String.isBlank(gkReq.serviceName)) ? gkReq.serviceName: ''),
                 'Comment__c' => ''
             };
             result = usageService.createCrmServiceUsage(props);
@@ -23,11 +35,12 @@ public without sharing class GatekeeperHandler implements IGatekeeperHandler {
     }
 
     public GatekeeperUtil.GatekeeperResponse handle(RestRequest req) {
+        GatekeeperUtil.GatekeeperResponse response = null;
         try 
         {
-            createUsageRecord(req);
-            GatekeeperUtil.GatekeeperResponse response = validator.validateGatekeeperRequest(req);
-            GatekeeperUtil.GatekeeperRequest gkReq = (GatekeeperUtil.GatekeeperRequest) JSON.deserialize(req.requestBody.toString(), GatekeeperUtil.GatekeeperRequest.class);   
+            GatekeeperUtil.GatekeeperRequest gkReq = getGatekeeperReq(req);
+            Crm_Service_Usage__c usageRecord = createUsageRecord(req, gkReq);
+            response = validator.validateGatekeeperRequest(req);
         }
         catch (Exception e) {
             throw new GatekeeperUtil.GatekeeperException(e.getMessage());    

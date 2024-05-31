@@ -1,5 +1,8 @@
 public without sharing class GatekeeperUtil {
 
+    public static final String INVALID_SERVICE_NAME = 'Invalid Service';
+    public static final String INVALID_SERVICE_DEVELOPER_NAME = 'Invalid_Service';
+
     public static final String MESSAGE_ERROR_INVALID_INPUT = 'Invalie input data received';
 
     public static final Integer STATUS_CODE_SUCCESS = 200;
@@ -65,7 +68,7 @@ public without sharing class GatekeeperUtil {
     public static GatekeeperRequest getGateKeeperRequestByRestRequest(RestRequest req) {
         GatekeeperUtil.GatekeeperRequest gkReq = null;
         try {
-            if(req != null && req.requestBody != null) {
+            if(req != null && req.requestBody != null && !String.isEmpty(req.requestBody.toString())) {
                 gkReq = (GatekeeperUtil.GatekeeperRequest) JSON.deserialize(req.requestBody.toString(), GatekeeperUtil.GatekeeperRequest.class);
             }
             else {

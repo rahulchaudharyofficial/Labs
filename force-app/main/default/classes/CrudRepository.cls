@@ -22,7 +22,7 @@ public without sharing class CrudRepository implements ICrudRepository {
     public SObject createByProperty(Map<String,Object> props)
     {
         SObject record = null;
-        if(props != null || props.isEmpty()) {
+        if(props == null || props.isEmpty()) {
             throw new GatekeeperUtil.GatekeeperException(GatekeeperUtil.MESSAGE_ERROR_INVALID_INPUT);
         }
 
