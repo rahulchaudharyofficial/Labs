@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Handler__c</fullName>
+    <externalId>false</externalId>
+    <inlineHelpText>Apex Class that will handle the service request, They all must implement IServiceHandler interface and override handle method.</inlineHelpText>
+    <label>Service Handler</label>
+    <length>100</length>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

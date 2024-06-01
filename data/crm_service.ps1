@@ -1,0 +1,1 @@
+sf data export tree --query query.txt --plan

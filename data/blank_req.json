@@ -1,0 +1,34 @@
+{
+    "statusCode": 500,
+    "status": "ERROR",
+    "response": "Rest request or request body is null",
+    "request": {
+        "resourcePath": "/services/apexrest/v01/gks",
+        "requestURI": "/v01/gks",
+        "requestBody": "",
+        "remoteAddress": "223.177.213.238",
+        "params": {},
+        "httpMethod": "POST",
+        "headers": {
+            "Content-Type": "application/json",
+            "X-Salesforce-org": "00DH400000015Kc",
+            "X-Salesforce-SNI": "PRESENT",
+            "X-B3-TraceId": "f57fefd0cf4a0846",
+            "Postman-Token": "57d52ce9-0848-4c0c-8345-6bee172c688a",
+            "X-B3-Sampled": "0",
+            "X-Edge-Next-Hop": "origin",
+            "X-B3-SpanId": "f57fefd0cf4a0846",
+            "Sforce-Call-Options": "client=postman",
+            "Via": "HTTP/1.1 sfdcedge",
+            "X-Salesforce-SIP": "223.177.213.238",
+            "X-Salesforce-VIP": "EDGE",
+            "Accept-Encoding": "gzip, deflate, br",
+            "X-SFDC-REQUEST-CHECK": "2",
+            "Host": "ruby-data-6810-dev-ed.scratch.my.salesforce.com",
+            "X-SFDC-Request-Id": "558706e24ce7270bbd1bd1f8382205c8",
+            "User-Agent": "PostmanRuntime/7.39.0",
+            "CipherSuite": "TLS_AES_256_GCM_SHA384 TLSv1.3 443",
+            "Accept": "*/*"
+        }
+    }
+}
