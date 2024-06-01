@@ -18,7 +18,7 @@ global class GatekeeperController {
             response.status = GatekeeperUtil.STATUS_ERROR;
             response.statusCode = GatekeeperUtil.STATUS_CODE_ERROR;
             response.response = e.getMessage();
-            response.request = req;
+            response.request = null;
         }
         return JSON.serialize(response);
     }

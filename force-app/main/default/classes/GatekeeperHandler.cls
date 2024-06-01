@@ -3,19 +3,26 @@ public without sharing class GatekeeperHandler implements IGatekeeperHandler {
     private ICrmServiceUsageService usageService = new CrmServiceUsageService();
     private ICrmService crmService = new CrmService();
 
-    public GatekeeperUtil.GatekeeperResponse handle(RestRequest req) {
-        GatekeeperUtil.GatekeeperResponse response = null;
-        Crm_Service_Usage__c usageRecord = null;
+    private Crm_Service_Usage__c createUsage(RestRequest req) {
+        Crm_Service_Usage__c usageRecord = usageService.createUsageRecordByRestRequest(req);
+        return usageRecord;
+    }
 
+    public GatekeeperUtil.GatekeeperResponse handle(RestRequest req) {
+        GatekeeperUtil.GatekeeperResponse response = new GatekeeperUtil.GatekeeperResponse();
+        GatekeeperUtil.GatekeeperValidationResponse validatorResponse = null;
+        Crm_Service_Usage__c usageRecord = null;
         try 
         {
-            usageRecord = usageService.createUsageRecordByRestRequest(req);
-            response = validator.validateGatekeeperRequest(req);
+            usageRecord = createUsage(req);
+            validatorResponse = validator.validate(req);
+            response.request = validatorResponse.reqDTO;
+            usageRecord.Status__c='Success';
+            usageService.updateCrmServiceUsage(new List<Crm_Service_Usage__c> {usageRecord}, false);
         }
         catch (Exception e) {
             throw new GatekeeperUtil.GatekeeperException(e.getMessage());    
         }
-        
         return response;
     }
 }

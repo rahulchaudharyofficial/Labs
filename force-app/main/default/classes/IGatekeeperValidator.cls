@@ -1,3 +1,3 @@
 public interface IGatekeeperValidator {
-    GatekeeperUtil.GatekeeperResponse validateGatekeeperRequest(RestRequest request);
+    GatekeeperUtil.GatekeeperValidationResponse validate(RestRequest request);
 }

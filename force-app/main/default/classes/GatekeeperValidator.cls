@@ -6,22 +6,31 @@ public without sharing class GatekeeperValidator implements IGatekeeperValidator
         request.params.putAll(req.params);
         request.httpMethod = req.httpMethod;
         request.remoteAddress = req.remoteAddress;
-        request.requestBody = req.requestBody;
+        request.requestBody = req.requestBody.toString();
         request.requestURI = req.requestURI;
         request.resourcePath = req.resourcePath;
         return request;
     }
 
-    private Boolean isRequestBodyValid(RestRequest req) {
-        Boolean flag = false;
+    private GatekeeperUtil.GatekeeperValidationResponse isRequestBodyValid(RestRequest req) {
+        GatekeeperUtil.GatekeeperValidationResponse result = new GatekeeperUtil.GatekeeperValidationResponse();
+
+        GatekeeperUtil.GatekeeperRequest request =  GatekeeperUtil.getGatekeeperRequestByRestRequestOrGetNull(req);
         GatekeeperUtil.RequestDTO reqDto = getRequestDTO(req);
-        GatekeeperUtil.getGateKeeperRequestByRestRequest(req);
-        return flag;
+
+        reqDto.request = request;
+        result.reqDTO = reqDto;
+        if(request == null) //if there is no valid request than no further processing required
+        {
+            return result;
+        }
+        
+        return result;
     }
     
-    public GatekeeperUtil.GatekeeperResponse validateGatekeeperRequest(RestRequest request) {
-        GatekeeperUtil.GatekeeperResponse response = new GatekeeperUtil.GatekeeperResponse();
+    public GatekeeperUtil.GatekeeperValidationResponse validate(RestRequest request) {
+        GatekeeperUtil.GatekeeperValidationResponse validatorResponse = new GatekeeperUtil.GatekeeperValidationResponse();
         
-        return response;       
+        return validatorResponse;       
     }
 }

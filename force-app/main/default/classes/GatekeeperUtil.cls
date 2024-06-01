@@ -24,13 +24,11 @@ public without sharing class GatekeeperUtil {
         public String requestBody {get;set;}
         public String requestURI {get; set;}
         public String resourcePath {get;set;}
-        public Boolean isRequestValid {get;set;}
 
         public RequestDTO() {
             this.headers = new Map<String, String>();
             this.params = new Map<String, String>();
             this.request = new GatekeeperUtil.GatekeeperRequest();
-            this.isRequestValid = false;
         }
     }
 
@@ -67,7 +65,7 @@ public without sharing class GatekeeperUtil {
         // status code
         public Integer statusCode {get;set;}
 
-        public RestRequest request {get; set;}
+        public RequestDTO request {get; set;}
 
         public GatekeeperResponse() {
             this.status = STATUS_SUCCESS;
@@ -77,13 +75,24 @@ public without sharing class GatekeeperUtil {
         }
     }
 
+    public class GatekeeperValidationResponse {
+        public Boolean isValid {get;set;}
+        public List<String> messages {get;set;}
+        public RequestDTO reqDTO;
+
+        public GatekeeperValidationResponse() {
+            this.isValid = false;
+            this.messages = new List<String>();
+            this.reqDTO = new RequestDTO();
+        }
+    }
+
     public static GatekeeperUtil.GatekeeperRequest getGatekeeperRequestByRestRequestOrGetNull(RestRequest req) {
         GatekeeperUtil.GatekeeperRequest gkReq = null;
         try {
             gkReq = GatekeeperUtil.getGateKeeperRequestByRestRequest(req);    
         } catch (Exception e) {
-            System.debug('GatekeeperHandler.getGatekeeperReq => '+ e.getMessage());
-            //throw new GatekeeperUtil.GatekeeperException(e.getMessage());
+            System.debug('GatekeeperHandler.getGatekeeperRequestByRestRequestOrGetNull => '+ e.getMessage());
             gkReq = null;
         }
         return gkReq;
